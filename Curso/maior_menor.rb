@@ -13,37 +13,37 @@ def sorteia_numero_secreto
     sorteado
 end
 
-def pede_um_numero(tentativa, numero_tentativas)
+def pede_um_numero(tentativa, numero_tentativas, chutes)
   puts "Tentativa " + tentativa.to_s + " de " + numero_tentativas.to_s + " !!!!"
+  puts "Chute até agora " + chutes.to_s
   puts "Entre com o número"
   chute = gets
   puts "Você chutou " + chute
   chute.to_i
 end
 
-def verifica_se_acertou(numero_secreto, chute)
+def verifica_se_acertou(numero_secreto, chute,tentativa, numero_tentativas)
 
     acertou = numero_secreto == chute
-      if acertou
+        if acertou
           puts "Vc acertou!!!!"
           puts "PARABÉNS!!!!!"
           return true
-        else
-          numero = numero_secreto > chute
-            if numero
+        end
+
+        numero = numero_secreto > chute
+        if numero
               puts "O numero Secreto é maior!!!!"
-              return false
-
-            else
+        else
               puts "Numero secreto é menor!!!"
-              return false
-            end
-              puts "Vc errou!!!\n\n"
-      end
+        end
+        puts "Vc errou!!!\n\n"
+        false 
 
-    puts "GAME OVER"
-
-
+        if tentativa == numero_tentativas
+             puts "GAME OVER!!!!"
+        end
+             
 end
 
 
@@ -51,10 +51,17 @@ da_boas_vindas
 numero_secreto = sorteia_numero_secreto
 
 numero_tentativas = 3
+chutes = []
+total_chutes = 0
+
 
 for tentativa in 1..numero_tentativas
-    chute = pede_um_numero(tentativa, numero_tentativas)
-    if verifica_se_acertou(numero_secreto, chute)
-      break
-    end
+    chute = pede_um_numero(tentativa, numero_tentativas, chutes)
+
+    chutes[total_chutes] = chute
+    total_chutes = total_chutes + 1
+
+      if verifica_se_acertou(numero_secreto, chute, tentativa, numero_tentativas)
+       break
+      end
 end
