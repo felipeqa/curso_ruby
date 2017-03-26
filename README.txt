@@ -6,7 +6,7 @@ git init - (cria o repositório local)
 
 git add -A  (Add todos os arquivos dentro da pasta)
 
-git commit -m "inserir aqui o comentário entre aspas"
+git commit -m (escreva aqui o comentario)
 
 
 git remote add origin https://github.com/felipeqa/curso_ruby.git  (Cria a conexão com o repositório remoto)
