@@ -28,7 +28,7 @@ def sorteia_numero_secreto(dificuldade)
   end
    
       
-    puts "Escolhendo um número secreto entre 0 e #{maximo - 1}."
+    puts "Escolhendo um número secreto entre 0 e #{maximo}."
     sorteado = rand(maximo)
     puts "Escolhido, que tal adivinhar hj o numero secreto?" + "\n\n"
     sorteado
@@ -96,10 +96,10 @@ end
 puts "Voce ganhou #{pontos_ate_agora} pontos"
 end
 
-def quer_jogar
+def nao_quer_jogar?
 puts "Quer continuar a jogar? (S/N)"
 quero_jogar = gets.strip
-quero_jogar.upcase == "S"
+nao_quer_jogar = quero_jogar.upcase == "N" || ""
 end
 
 
@@ -107,6 +107,9 @@ end
 nome = da_boas_vindas
 dificuldade = pede_dificuldade
 
-while quer_jogar
-joga(nome, dificuldade)
+loop do
+  joga(nome, dificuldade)
+    if nao_quer_jogar?
+    break
+  end
 end
