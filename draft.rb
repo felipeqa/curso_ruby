@@ -1,5 +1,5 @@
-
-puts "Escreva seu nome" 
+####Teste
+puts "Escreva seu nome"
 nome = gets.strip
 
 puts nome.to_s + " Caracteres"
