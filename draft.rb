@@ -1,5 +1,3 @@
-####Teste##############
-
 puts "Escreva seu nome"
 nome = gets.strip
 
