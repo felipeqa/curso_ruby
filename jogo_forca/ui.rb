@@ -1,4 +1,12 @@
-def avisa_chute_efetuado chute
+def avisa_campeao_atual(dados)
+  puts "Nosso campeão atual é #{dados[0]} com #{dados[1]} pontos."
+end
+
+def avisa_pontos_totais(pontos_totais)
+  puts "Voce possui #{pontos_totais}"
+end
+
+def avisa_chute_efetuado(chute)
   puts "Você já chutou #{chute}"
 end
 
@@ -31,15 +39,17 @@ def da_boas_vindas
   nome
 end
 
-def escolhe_palavra_secreta
+def avisa_escolhendo_palavra
   puts "Escolhendo uma palavra secreta..."
-  palavra_secreta = "programador"
+end
+
+def avisa_palavra_escolhida palavra_secreta
   puts "Palavra secreta com #{palavra_secreta.size} letras ... Boa sorte"
   palavra_secreta
 end
 
 def nao_quer_jogar?
-  puts " Deseja jogar novamente? (S/N)"
+  puts "Deseja jogar novamente? (S/N)"
   quero_jogar = gets.strip
   nao_quer_jogar = quero_jogar.upcase == "N"
 end
@@ -53,7 +63,7 @@ end
 
 def pede_um_chute
   puts "Entre com uma letra ou uma palavra"
-  chute = gets.strip
+  chute = gets.strip.downcase
   puts "Sera que acertou? Voce chutou #{chute}"
   chute
 end
