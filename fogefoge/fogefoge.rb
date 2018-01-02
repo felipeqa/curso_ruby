@@ -189,10 +189,46 @@ def jogador_perdeu?(mapa)
   !encontra_jogador(mapa) #! VERIFICA SE O RETORNO É NIL OU FALSE
 end
 
+#Sem refatorar
+# def remove(mapa,nova_posicao,quantidade)
+#   for direita in 1..quantidade
+#     mapa[nova_posicao.linha][nova_posicao.coluna + direita] = " "
+#   end
+# end
+
+#refatorada
+# def remove(mapa, posicao, quantidade)
+#   for direita in 1..quantidade
+#     posicao = posicao.direita
+#     posicao.remove_do mapa
+#   end
+# end
+
+#refatorar com recursão
+
+def remove(mapa, posicao, quantidade)
+  if quantidade == 0
+    return
+  end
+  executa_remocao mapa, posicao.direita, quantidade
+  executa_remocao mapa, posicao.esquerda, quantidade
+  executa_remocao mapa, posicao.baixo, quantidade
+  executa_remocao mapa, posicao.cima, quantidade
+end
+
+def executa_remocao(mapa, posicao, quantidade)
+  if mapa[posicao.linha][posicao.coluna] == "X"
+    return
+  end
+
+  posicao.remove_do mapa
+
+  remove mapa, posicao, quantidade - 1
+end
 
 def joga(nome)
 
-  mapa = le_mapa 2
+  mapa = le_mapa 4
 
   while true
     desenha(mapa)
@@ -206,6 +242,11 @@ def joga(nome)
     end
 
     heroi.remove_do mapa
+
+    if mapa[nova_posicao.linha][nova_posicao.coluna] == "*"
+      remove mapa, nova_posicao, 4
+    end
+
     nova_posicao.coloca_no mapa
 
     # mapa[heroi.linha][heroi.coluna] = " "
