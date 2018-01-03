@@ -62,7 +62,7 @@ def posicao_valida?(mapa, posicao)
   linhas = mapa.size
   colunas = mapa[0].size
   estourou_linhas = posicao[0] < 0 || posicao[0] >= linhas
-  estorou_colunas = posicao[1] < 1 || posicao[1] >= colunas
+  estorou_colunas = posicao[1] < 0 || posicao[1] >= colunas
 
   if estourou_linhas || estorou_colunas
     return false
@@ -217,7 +217,15 @@ def remove(mapa, posicao, quantidade)
 end
 
 def executa_remocao(mapa, posicao, quantidade)
-  if mapa[posicao.linha][posicao.coluna] == "X"
+
+  linhas = mapa.size
+  colunas = mapa[0].size
+  estourou_linhas = posicao.linha < 0 || posicao.linha >= linhas
+  estorou_colunas = posicao.coluna < 0 || posicao.coluna >= colunas
+
+  if estourou_linhas || estorou_colunas
+    return
+  elsif mapa[posicao.linha][posicao.coluna] == "X"
     return
   end
 
@@ -228,11 +236,19 @@ end
 
 def joga(nome)
 
-  mapa = le_mapa 4
+  mapa = le_mapa 3
+  direcao = nil
 
   while true
     desenha(mapa)
+
     direcao = pede_movimento
+
+    while direcao != "W" && direcao != "A" && direcao != "S" && direcao != "D"
+      movimento_invalido
+      direcao = pede_movimento
+    end
+
     heroi = encontra_jogador mapa
 
     nova_posicao = heroi.calcula_nova_posicao direcao

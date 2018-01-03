@@ -13,10 +13,14 @@ end
 
 def pede_movimento
   puts "Para onde deseja ir?"
-  movimento = gets.strip
+  movimento = gets.upcase.strip
 end
 
 def game_over
   puts "\n\n\n"
   puts "Game Over"
+end
+
+def movimento_invalido
+  puts "Movimento inválido, selecione entre as teclas 'WASD'"
 end
